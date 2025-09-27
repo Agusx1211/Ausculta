@@ -1,0 +1,7 @@
+<!-- Ausculta icon -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Ausculta icon">
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="#111213"/>
+  <path d="M128 196 A128 128 0 0 0 384 196" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <path d="M128 316 A128 128 0 0 1 384 316" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <path d="M96 256 H170 L192 220 L222 320 L258 140 L294 360 L318 256 H416" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

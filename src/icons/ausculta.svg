@@ -1,0 +1,15 @@
+<!-- ausculta-icon-512.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+     style="color:#ffffff; --bg:#111213; shape-rendering:geometricPrecision" role="img" aria-label="Ausculta icon">
+  <defs>
+    <style>
+      .bg{ fill:var(--bg); } .fg{ stroke:currentColor; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+      .thin{ stroke-width:12; opacity:.55 } .thick{ stroke-width:24 }
+    </style>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="96" class="bg"/>
+  <path d="M128 196 A128 128 0 0 0 384 196" class="fg thin"/>
+  <path d="M128 316 A128 128 0 0 1 384 316" class="fg thin"/>
+  <path d="M96 256 H170 L192 220 L222 320 L258 140 L294 360 L318 256 H416" class="fg thick"/>
+</svg>
+

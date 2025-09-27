@@ -1,4 +1,9 @@
 // Config
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => console.error('Service worker registration failed', err));
+  });
+}
 const ENV_FS_DEFAULT = 200;        // envelope sample rate (Hz)
 const MIN_BPM = 40, MAX_BPM = 210; // search range
 const MAX_PEAKS = 3;
@@ -24,6 +29,7 @@ let playbackOutputMode = 'original';
 let heartbeatCache = { bpm: null, sampleRate: null, buffer: null };
 let recorderFlushPromise = null;
 let recorderFlushResolve = null;
+let deferredInstallPrompt = null;
 
 // UI
 const startBtn = document.getElementById('startBtn');
@@ -45,6 +51,8 @@ const pauseBtn = document.getElementById('pauseBtn');
 const seekEl = document.getElementById('seek');
 const playbackTimeEl = document.getElementById('playbackTime');
 const outputModeEl = document.getElementById('outputMode');
+const installStrip = document.getElementById('installStrip');
+const installPwaBtn = document.getElementById('installPwaBtn');
 
 sensEl.addEventListener('input', () => sensitivity = parseFloat(sensEl.value));
 winSecEl.addEventListener('change', () => {
@@ -63,6 +71,35 @@ pauseBtn.addEventListener('click', pausePlayback);
 seekEl.addEventListener('input', onSeekInput);
 seekEl.addEventListener('change', onSeekRelease);
 outputModeEl.addEventListener('change', () => setPlaybackOutput(outputModeEl.value));
+
+if (installStrip && installPwaBtn) {
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    installStrip.hidden = false;
+  });
+
+  installPwaBtn.addEventListener('click', async () => {
+    installPwaBtn.disabled = true;
+    try {
+      if (!deferredInstallPrompt) {
+        installStrip.hidden = true;
+        return;
+      }
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+    } finally {
+      deferredInstallPrompt = null;
+      installStrip.hidden = true;
+      installPwaBtn.disabled = false;
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    deferredInstallPrompt = null;
+    installStrip.hidden = true;
+  });
+}
 
 async function start() {
   if (liveActive) return;

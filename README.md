@@ -18,6 +18,10 @@ Ausculta is a browser-based demo that listens to a microphone input, extracts th
 - **Start/Stop**: Begin or stop microphone capture.
 - **Sensitivity**: Adjust the detection threshold (lower values reduce gain, higher values increase).
 - **Window**: Choose the analysis window in seconds for the autocorrelation detector.
+- **Start/Stop recording**: Capture the raw microphone stream in memory for later review (requires the microphone to be active).
+- **Download raw WAV**: Export the in-memory recording as a 16-bit mono WAV file without filtering or processing.
+- **Upload audio…**: Load an existing audio file for offline analysis; multichannel files are downmixed to mono automatically.
+- **Playback controls**: Play/pause, scrub the timeline, and toggle between the original recording and an augmented synthetic heartbeat derived from the detected BPM (if available).
 
 ## File Layout
 

@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Realtime Multi-Heartbeat Detector (WebAudio)</title>
+  <title>Ausculta - Heartbeat microphone</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
+  <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#111213" />
 </head>
 <body>
   <!-- Not a medical device. Demonstration only. Place mic close to chest or use stethoscope tube to mic adapter. -->
   <header>
-    <h1>Realtime Multi-Heartbeat Detector</h1>
+    <h1 class="brand">
+      <img src="./icons/ausculta.svg" alt="Ausculta logo" width="36" height="36" loading="lazy">
+      <span>Ausculta - Heartbeat microphone</span>
+    </h1>
     <div class="controls">
       <button id="startBtn" class="primary">Start microphone</button>
       <button id="stopBtn" disabled>Stop</button>
@@ -97,6 +104,10 @@
         </ul>
       </details>
     </div>
+  </div>
+
+  <div class="install-strip" id="installStrip" hidden>
+    <button id="installPwaBtn" class="primary" type="button">Install Ausculta</button>
   </div>
 
   <script src="./app.js" defer></script>
