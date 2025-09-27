@@ -327,8 +327,8 @@ async function onUploadSelected(ev) {
 async function playPlayback() {
   if (!playbackData) return;
   const ctx = ensurePlaybackContext();
+  if (liveActive) stop();
   await ctx.resume();
-  if (liveActive) await stop();
   if (!playbackState) initPlaybackState();
   if (playbackState.playing) return;
   startPlaybackSources();
@@ -367,10 +367,9 @@ function onSeekRelease() {
 }
 
 function setPlaybackOutput(mode) {
-  if (mode === 'augmented' && (!playbackData || !playbackData.primaryBpm)) {
-    outputModeEl.value = 'original';
-    return;
-  }
+  const augmentedAvailable = !!(playbackData && playbackData.primaryBpm);
+  if (mode === 'augmented' && !augmentedAvailable) mode = 'original';
+  outputModeEl.value = mode;
   playbackOutputMode = mode;
   updatePlaybackGains();
 }
@@ -400,8 +399,10 @@ function preparePlayback(raw, sampleRate, label) {
   seekEl.max = playbackData.duration.toFixed(2);
   seekEl.value = '0';
   playbackTimeEl.textContent = `${formatTime(0)} / ${formatTime(playbackData.duration)}`;
+  // Hard reset to a safe audible mode
   outputModeEl.value = 'original';
-  setPlaybackOutput('original');
+  playbackOutputMode = 'original';
+  if (playbackCtx) updatePlaybackGains();
   const augmentedOption = outputModeEl.querySelector('option[value="augmented"]');
   if (augmentedOption) augmentedOption.disabled = !playbackData.primaryBpm;
   outputModeEl.disabled = !playbackData.primaryBpm;
@@ -437,8 +438,10 @@ function ensurePlaybackContext() {
 
 function updatePlaybackGains() {
   if (!playbackGains.original || !playbackGains.augmented) return;
-  playbackGains.original.gain.value = playbackOutputMode === 'original' ? 1 : 0;
-  playbackGains.augmented.gain.value = playbackOutputMode === 'augmented' ? 1 : 0;
+  const augmentedAvailable = !!(playbackData && playbackData.primaryBpm);
+  const mode = (playbackOutputMode === 'augmented' && augmentedAvailable) ? 'augmented' : 'original';
+  playbackGains.original.gain.value = (mode === 'original') ? 1 : 0;
+  playbackGains.augmented.gain.value = (mode === 'augmented') ? 1 : 0;
 }
 
 function startPlaybackSources() {
@@ -536,6 +539,10 @@ function updatePlaybackControlsState() {
   seekEl.disabled = false;
   const augmentedOption = outputModeEl.querySelector('option[value="augmented"]');
   const hasHeartbeat = !!playbackData.primaryBpm;
+  if (!hasHeartbeat && playbackOutputMode !== 'original') {
+    playbackOutputMode = 'original';
+    outputModeEl.value = 'original';
+  }
   if (augmentedOption) augmentedOption.disabled = !hasHeartbeat;
   outputModeEl.disabled = !hasHeartbeat;
   updatePlaybackGains();
