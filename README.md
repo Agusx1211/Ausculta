@@ -1,6 +1,8 @@
-# Realtime Multi-Heartbeat Detector
+# Ausculta
 
-A browser-based demo that listens to a microphone input, extracts the amplitude envelope, and detects likely heartbeat peaks in real time. It visualises both the filtered waveform and the autocorrelation used for peak picking, highlighting adult and fetal heart rate bands.
+[Deployed Version](https://agusx1211.github.io/Ausculta)
+
+Ausculta is a browser-based demo that listens to a microphone input, extracts the amplitude envelope, and detects likely heartbeat peaks in real time. It visualises both the filtered waveform and the autocorrelation used for peak picking, highlighting adult and fetal heart rate bands.
 
 **Warning:** This project is a demonstration only and is not a medical device for diagnosis or monitoring.
 
