@@ -6,6 +6,8 @@ Ausculta is a browser-based demo that listens to a microphone input, extracts th
 
 **Warning:** This project is a demonstration only and is not a medical device for diagnosis or monitoring.
 
+![Ausculta interface showing waveform and heart rate detection](docs/ausculta-ui.png)
+
 ## Getting Started
 
 1. Serve the `src` directory over HTTPS or `localhost` with HTTP. Access to `getUserMedia` requires a secure context.
