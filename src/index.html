@@ -11,6 +11,25 @@
   <meta name="theme-color" content="#111213" />
 </head>
 <body>
+  <div id="disclaimerModal" class="disclaimer-modal" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle" aria-describedby="disclaimerDesc" hidden>
+    <div class="disclaimer-card">
+      <h2 id="disclaimerTitle">Not a medical device</h2>
+      <div id="disclaimerDesc" class="disclaimer-copy">
+        <p>Ausculta is an educational demo that estimates heartbeat rhythms from microphone audio. It is not cleared by any regulator and must not be used for diagnosis, monitoring, or treatment.</p>
+        <ul>
+          <li>Readings can be inaccurate or fail, especially in noise or with poor placement.</li>
+          <li>Do not use for medical decisions or self-monitoring during pregnancy.</li>
+          <li>If you feel unwell or suspect a problem, contact a clinician or emergency services.</li>
+        </ul>
+        <p><strong>Privacy:</strong> audio is processed on your device. Nothing is uploaded unless you choose to download or share a recording.</p>
+        <p>By selecting <em>I understand</em> you accept these limits and use the app at your own risk.</p>
+      </div>
+      <div class="disclaimer-actions">
+        <button id="disclaimerAcceptBtn" class="primary" type="button">I understand</button>
+        <button id="disclaimerSourceBtn" type="button">View source code</button>
+      </div>
+    </div>
+  </div>
   <!-- Not a medical device. Demonstration only. Place mic close to chest or use stethoscope tube to mic adapter. -->
   <header>
     <h1 class="brand">

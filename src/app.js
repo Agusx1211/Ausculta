@@ -53,6 +53,12 @@ const playbackTimeEl = document.getElementById('playbackTime');
 const outputModeEl = document.getElementById('outputMode');
 const installStrip = document.getElementById('installStrip');
 const installPwaBtn = document.getElementById('installPwaBtn');
+const disclaimerModal = document.getElementById('disclaimerModal');
+const disclaimerAcceptBtn = document.getElementById('disclaimerAcceptBtn');
+const disclaimerSourceBtn = document.getElementById('disclaimerSourceBtn');
+
+const DISCLAIMER_STORAGE_KEY = 'auscultaDisclaimerAccepted';
+let disclaimerAcknowledgedSession = false;
 
 sensEl.addEventListener('input', () => sensitivity = parseFloat(sensEl.value));
 winSecEl.addEventListener('change', () => {
@@ -71,6 +77,8 @@ pauseBtn.addEventListener('click', pausePlayback);
 seekEl.addEventListener('input', onSeekInput);
 seekEl.addEventListener('change', onSeekRelease);
 outputModeEl.addEventListener('change', () => setPlaybackOutput(outputModeEl.value));
+
+initDisclaimer();
 
 if (installStrip && installPwaBtn) {
   window.addEventListener('beforeinstallprompt', event => {
@@ -99,6 +107,74 @@ if (installStrip && installPwaBtn) {
     deferredInstallPrompt = null;
     installStrip.hidden = true;
   });
+}
+
+function initDisclaimer() {
+  if (!disclaimerModal || !disclaimerAcceptBtn || !disclaimerSourceBtn) return;
+
+  const acknowledged = getDisclaimerAcknowledged();
+
+  if (!acknowledged) {
+    showDisclaimer();
+  }
+
+  disclaimerAcceptBtn.addEventListener('click', () => {
+    setDisclaimerAcknowledged(true);
+    hideDisclaimer();
+  });
+
+  disclaimerSourceBtn.addEventListener('click', () => {
+    window.open('https://github.com/agusx1211/ausculta', '_blank', 'noopener,noreferrer');
+  });
+}
+
+function showDisclaimer() {
+  disclaimerModal.removeAttribute('hidden');
+  document.body.classList.add('disclaimer-open');
+  setTimeout(() => {
+    if (document.activeElement === document.body) {
+      disclaimerAcceptBtn?.focus();
+    }
+  }, 0);
+}
+
+function hideDisclaimer() {
+  disclaimerModal.setAttribute('hidden', '');
+  document.body.classList.remove('disclaimer-open');
+}
+
+function getDisclaimerAcknowledged() {
+  if (disclaimerAcknowledgedSession) return true;
+
+  try {
+    if (localStorage.getItem(DISCLAIMER_STORAGE_KEY) === 'true') {
+      disclaimerAcknowledgedSession = true;
+      return true;
+    }
+  } catch {}
+
+  try {
+    if (sessionStorage.getItem(DISCLAIMER_STORAGE_KEY) === 'true') {
+      disclaimerAcknowledgedSession = true;
+      return true;
+    }
+  } catch {}
+
+  return false;
+}
+
+function setDisclaimerAcknowledged(value) {
+  if (!value) return;
+  disclaimerAcknowledgedSession = true;
+  let stored = false;
+  try {
+    localStorage.setItem(DISCLAIMER_STORAGE_KEY, 'true');
+    stored = true;
+  } catch {}
+
+  if (!stored) {
+    try { sessionStorage.setItem(DISCLAIMER_STORAGE_KEY, 'true'); } catch {}
+  }
 }
 
 async function start() {
