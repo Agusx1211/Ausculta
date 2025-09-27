@@ -361,7 +361,7 @@ function downloadRecording() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `mic-heart-${Date.now()}.wav`;
+  a.download = `mic-ausculta-${Date.now()}.wav`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -1153,7 +1153,7 @@ function renderPeaks(peaks) {
       const tag = document.createElement('span');
       const bpm = Math.round(p.bpm);
       tag.className = 'badge ' + (bpm >= 110 && bpm <= 160 ? 'ok' : (bpm < 50 || bpm > 180 ? 'warn' : ''));
-      tag.textContent = (bpm >= 110 && bpm <= 160) ? 'fetal range' : ((bpm < 50 || bpm > 180) ? 'atypical' : 'adult range');
+      tag.textContent = (bpm >= 110 && bpm <= 160) ? 'fast band' : ((bpm < 50 || bpm > 180) ? 'out of band' : 'typical band');
       const strong = document.createElement('span'); strong.className = 'bpm'; strong.textContent = `${bpm} BPM`;
       const conf = document.createElement('span'); conf.className = 'conf'; conf.textContent = `conf ${(p.conf*100).toFixed(0)}%`;
       div.append(strong, conf, tag);

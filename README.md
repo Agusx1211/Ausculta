@@ -2,11 +2,11 @@
 
 [Deployed Version](https://agusx1211.github.io/Ausculta)
 
-Ausculta is a browser-based demo that listens to a microphone input, extracts the amplitude envelope, and detects likely heartbeat peaks in real time. It visualises both the filtered waveform and the autocorrelation used for peak picking, highlighting adult and fetal heart rate bands.
+Ausculta is a browser-based demo that listens to a microphone input, extracts the amplitude envelope, and estimates the beat rate of heart-sound-like patterns in real time. It visualises the filtered waveform and the autocorrelation used for peak picking, highlighting slow and fast BPM bands.
 
 **Warning:** This project is a demonstration only and is not a medical device for diagnosis or monitoring.
 
-![Ausculta interface showing waveform and heart rate detection](docs/ausculta-ui.png)
++![Ausculta interface showing waveform and BPM estimation](docs/ausculta-ui.png)
 
 ## Getting Started
 
@@ -37,7 +37,7 @@ src/
 ## Development Notes
 
 - The envelope is computed in an `AudioWorkletProcessor` running at 200 Hz with a short smoothing filter.
-- Peak detection uses autocorrelation with harmonic suppression to identify up to three heart rates in the 40-210 BPM range.
+- Peak detection uses autocorrelation with harmonic suppression to identify up to three BPM peaks in the 40–210 BPM range.
 
 ## Deployment
 

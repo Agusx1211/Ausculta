@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Ausculta - Heartbeat Microphone",
+  "name": "Ausculta — Heart-sound BPM estimator",
   "short_name": "Ausculta",
-  "description": "Realtime multi-heartbeat monitor using the microphone and Web Audio API.",
+  "description": "Realtime heart-sound demo and BPM estimator using the microphone and Web Audio API.",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",

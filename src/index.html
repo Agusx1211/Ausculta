@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Ausculta - Heartbeat microphone</title>
+  <title>Ausculta — Heart-sound BPM estimator</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
@@ -34,7 +34,7 @@
   <header>
     <h1 class="brand">
       <img src="./icons/ausculta.svg" alt="Ausculta logo" width="36" height="36" loading="lazy">
-      <span>Ausculta - Heartbeat microphone</span>
+      <span>Ausculta — Heart-sound BPM estimator</span>
     </h1>
     <div class="controls">
       <button id="startBtn" class="primary">Start microphone</button>
@@ -72,7 +72,7 @@
         <div class="stat small"><div>Envelope Fs</div><div id="efs" class="muted">200 Hz</div></div>
       </div>
       <div class="sep"></div>
-      <div class="small muted">Detected heartbeats</div>
+      <div class="small muted">Detected beats</div>
       <div id="beats" class="beats"></div>
       <div class="sep"></div>
       <div class="small muted">Recording</div>
@@ -96,12 +96,12 @@
         <label class="small muted">Output
           <select id="outputMode" disabled>
             <option value="original">Original</option>
-            <option value="augmented">Augmented heartbeat</option>
+            <option value="augmented">Augmented beats</option>
           </select>
         </label>
       </div>
       <div class="sep"></div>
-      <div class="footer">Tip: reduce sensitivity if it latches to noise. Typical adult 50–110 BPM. Typical fetal 110–160 BPM. <a href="https://github.com/agusx1211/ausculta" target="_blank" rel="noreferrer noopener">View source on GitHub</a>.</div>
+      <div class="footer">Tip: reduce sensitivity if it latches to noise. Typical resting adult ~50–110 BPM. A fast band is often ~110–160 BPM. Not medical. <a href="https://github.com/agusx1211/ausculta" target="_blank" rel="noreferrer noopener">View source on GitHub</a>.</div>
     </div>
     <div class="panel small">
       <details>
