@@ -42,3 +42,14 @@ canvas { width: 100%; height: 160px; display:block; border-radius: 10px; backgro
 .footer { margin-top: 10px; font-size: 11px; opacity: .7 }
 details { border: 1px dashed color-mix(in lch, canvastext 20%, canvas); border-radius: 10px; padding:8px 10px; }
 summary { cursor: pointer; }
+.record-controls, .playback-controls { display:flex; gap:8px; flex-wrap: wrap; align-items:center; margin-bottom: 6px; }
+.playback-controls { flex-direction: column; align-items:flex-start; gap:6px; }
+.playback-row { display:flex; gap:8px; align-items:center; width:100%; flex-wrap: wrap; }
+.playback-row input[type="range"] { flex: 1 1 160px; min-width: 120px; }
+.file-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  border: 1px solid color-mix(in lch, canvastext 20%, canvas);
+  background: color-mix(in lch, canvas 92%, canvastext);
+  color: inherit; border-radius: 10px; padding: 8px 12px; cursor: pointer;
+}
+.file-btn span { pointer-events: none; }
